@@ -1,0 +1,19 @@
+module tb;
+    reg [15:0]x,y;
+    reg start,clk;
+    wire [31:0]z;
+    booth dut(z,x,y,clk,start);
+    initial
+        clk=0;
+    always
+        #1 clk=~clk;
+    initial
+        begin
+        start=0;x=-4;y=-2;
+        #1 start=1;
+        #100 $finish;
+        $monitor("a=%b,q=%b,qm=%b,count=%b,z=%b",dut.a,dut.q,dut.qm,dut.count,z);
+        end
+    
+endmodule
+        
